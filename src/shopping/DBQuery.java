@@ -83,8 +83,7 @@ public class DBQuery {
 		}
 
 	}
-	
-	
+
 	public boolean exist(String username, String password) throws SQLException {
 		Connection dbConnection = null;
 		PreparedStatement preparedStatement = null;
@@ -183,9 +182,8 @@ public class DBQuery {
 				row.setItemName(rs.getString("NAME"));
 				String name = rs.getString("NAME");
 
-				data += "<tr>" + " <td>" + name + "</td>"
-					           + " <td><a href='adminItems.jsp?item_id=" + rs.getString("item_id") + "'>Get Details</a></td>"
-					 + "</tr>";
+				data += "<tr>" + " <td>" + name + "</td>" + " <td><a href='adminItems.jsp?item_id="
+						+ rs.getString("item_id") + "'>Get Details</a></td>" + "</tr>";
 
 				System.out.println(row.getItemName());
 
@@ -409,13 +407,12 @@ public class DBQuery {
 
 	}
 
-	
-	public void addItem(String username, String password) throws SQLException {
+	public Item addItem(int item_id,String name, double price, String description, int quantity) throws SQLException {
 
 		Connection dbConnection = null;
 		PreparedStatement preparedStatement = null;
 
-		String insertTableSQL = "INSERT INTO users" + "(user_id, username, password, user_type_id) VALUES"
+		String insertTableSQL = "INSERT INTO item" + "(item_id,name, price, description,quantity) VALUES"
 				+ "(ID_SEQ.NEXTVAL,?,?, 2)";
 
 		try {
@@ -423,11 +420,15 @@ public class DBQuery {
 			preparedStatement = dbConnection.prepareStatement(insertTableSQL);
 
 			// execute insert SQL statement
-			preparedStatement.setString(1, username);
-			preparedStatement.setString(2, password);
+			preparedStatement.setInt(1, item_id);
+			preparedStatement.setString(2, name);
+			preparedStatement.setDouble(3, price);
+			preparedStatement.setString(4, description);
+			preparedStatement.setInt(5, quantity);
+
 			preparedStatement.executeUpdate();
 
-			System.out.println("Record is inserted into DBUSER table!");
+			System.out.println("Record is inserted into Item table!");
 
 		} catch (SQLException e) {
 
@@ -444,10 +445,9 @@ public class DBQuery {
 			}
 
 		}
+		return null;
+     }
 
-	}
-	
-	
 	public void updateItem(int item_id, String name, double price, String description, int quantity)
 			throws SQLException {
 
@@ -485,5 +485,7 @@ public class DBQuery {
 		}
 
 	}
+	
+	
 
 }

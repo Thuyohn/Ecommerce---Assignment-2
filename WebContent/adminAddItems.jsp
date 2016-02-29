@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@ page import="shopping.Item" %>
+    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -13,8 +15,20 @@
 	<% 
 		if(request.getParameter("addItem") != null)
 		{
-			//Item addItem = new Item();
-			
+			//Item addItem = new Item();		
+		}
+	
+	
+		if (request.getParameter("addItem") != null) {
+			Item updateItem = new Item();
+			updateItem.setName(request.getParameter("name"));
+			updateItem.setPrice(Float.parseFloat(request.getParameter("price")));
+			updateItem.setDescription(request.getParameter("description"));
+			updateItem.setQuantity(Integer.parseInt(request.getParameter("quantity")));
+
+		///last ws here
+			data.addItem(updateItem.get,updateItem.getName(), updateItem.getPrice(), updateItem.getDescription(),
+					updateItem.getQuantity());
 		}
 	%>
 	<h1>Add Items</h1>

@@ -12,44 +12,40 @@
 
 
  	<%
-		if(session.getAttribute("username") != null && !data.isAdmin(session.getAttribute("username").toString()))
-			response.sendRedirect(request.getContextPath() + "/login.jsp");
-	
-		if(request.getParameter("item_id") == null || request.getParameter("item_id").equals(""))
-		{
-			response.sendRedirect(request.getContextPath() + "/adminIndex.jsp");
-			return;
-		}
-		
-		
-		//delete
-		if(request.getParameter("delete") != null)
-		{
-			int item_id = Integer.parseInt(request.getParameter("item_id")); //get the itemid after clicking delete
-			data.deleteItem(item_id);
-			response.sendRedirect(request.getContextPath() + "/adminIndex.jsp?delete="+item_id);
-			return;
-		}
-		
-		//update
-		if(request.getParameter("update") != null)
-		{
-			Item updateItem = new Item();
-			updateItem.setName(request.getParameter("name"));
-			updateItem.setDescription(request.getParameter("description"));
-			updateItem.setPrice(Float.parseFloat(request.getParameter("price")));
-			updateItem.setQuantity(Integer.parseInt(request.getParameter("quantity")));
-			
-			int item_id = Integer.parseInt(request.getParameter("item_id"));
-			
-			data.updateItem(item_id, updateItem.getName(), updateItem.getPrice(), updateItem.getDescription(), updateItem.getQuantity());
-		}
-			
-		
-		int item_id = Integer.parseInt(request.getParameter("item_id"));
-		Item item = data.getItem(item_id);
-		//System.out.println(item);
-	%> 
+ 		if (session.getAttribute("username") != null && !data.isAdmin(session.getAttribute("username").toString()))
+ 			response.sendRedirect(request.getContextPath() + "/login.jsp");
+
+ 		if (request.getParameter("item_id") == null || request.getParameter("item_id").equals("")) {
+ 			response.sendRedirect(request.getContextPath() + "/adminIndex.jsp");
+ 			return;
+ 		}
+
+ 		//delete
+ 		if (request.getParameter("delete") != null) {
+ 			int item_id = Integer.parseInt(request.getParameter("item_id")); //get the itemid after clicking delete
+ 			data.deleteItem(item_id);
+ 			response.sendRedirect(request.getContextPath() + "/adminIndex.jsp?delete=" + item_id);
+ 			return;
+ 		}
+
+ 		//update
+ 		if (request.getParameter("update") != null) {
+ 			Item updateItem = new Item();
+ 			updateItem.setName(request.getParameter("name"));
+ 			updateItem.setDescription(request.getParameter("description"));
+ 			updateItem.setPrice(Float.parseFloat(request.getParameter("price")));
+ 			updateItem.setQuantity(Integer.parseInt(request.getParameter("quantity")));
+
+ 			int item_id = Integer.parseInt(request.getParameter("item_id"));
+
+ 			data.updateItem(item_id, updateItem.getName(), updateItem.getPrice(), updateItem.getDescription(),
+ 					updateItem.getQuantity());
+ 		}
+
+ 		int item_id = Integer.parseInt(request.getParameter("item_id"));
+ 		Item item = data.getItem(item_id);
+ 		//System.out.println(item);
+ 	%> 
 	
 	<form method="post">
 		<table>

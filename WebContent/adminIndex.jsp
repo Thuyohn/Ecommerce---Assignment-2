@@ -68,7 +68,7 @@
 		<tr>
 			<td><a href="adminAddItems.jsp"><button id="addItem"
 						name="addItemButton" onClick="addItem.jsp">add Item</button></a></td>
-		</tr>
+		</tr> 
 		<tr>
 			<td><a href="order.jsp"><button id="viewOrders"
 						name="addOrdersButton">View Orders</button></a></td>
