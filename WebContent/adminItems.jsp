@@ -11,7 +11,7 @@
 <body>
 
 
-	<%
+ 	<%
 		if(session.getAttribute("username") != null && !data.isAdmin(session.getAttribute("username").toString()))
 			response.sendRedirect(request.getContextPath() + "/login.jsp");
 	
@@ -21,10 +21,11 @@
 			return;
 		}
 		
+		
 		//delete
 		if(request.getParameter("delete") != null)
 		{
-			int item_id = Integer.parseInt(request.getParameter("item_id"));
+			int item_id = Integer.parseInt(request.getParameter("item_id")); //get the itemid after clicking delete
 			data.deleteItem(item_id);
 			response.sendRedirect(request.getContextPath() + "/adminIndex.jsp?delete="+item_id);
 			return;
@@ -48,7 +49,7 @@
 		int item_id = Integer.parseInt(request.getParameter("item_id"));
 		Item item = data.getItem(item_id);
 		//System.out.println(item);
-	%>
+	%> 
 	
 	<form method="post">
 		<table>

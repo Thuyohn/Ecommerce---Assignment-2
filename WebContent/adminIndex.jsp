@@ -35,10 +35,19 @@
 	<h1 align="center">List of Items</h1>
 	<h3>
 	<%
+		//runs each time page load if button delete is clicked
 		if(request.getParameter("delete") != null)
 		{
 			int item_id = Integer.parseInt(request.getParameter("delete"));
 			out.println("Deleted item with id : " + item_id);
+		}
+	
+	
+		//ADDED AN ITEM MESSAGE
+		if(request.getParameter("addItem") != null)
+		{
+			int item_id = Integer.parseInt(request.getParameter("addItem"));
+			out.println("Added item with id : " + item_id);
 		}
 	%>
 	</h3>
@@ -51,23 +60,22 @@
 		</tr> 
 		
 		<tr><%= data.listOfItem() %></tr>
-		
 
 	</table>
 	<br />
 	<br />
 	<table>
 		<tr>
-			<td><a href="addItem.jsp"><button id="addItem"
-						name="ItemButton" onClick="addItem.jsp">add Item</button></a></td>
+			<td><a href="adminAddItems.jsp"><button id="addItem"
+						name="addItemButton" onClick="addItem.jsp">add Item</button></a></td>
 		</tr>
 		<tr>
 			<td><a href="order.jsp"><button id="viewOrders"
-						name="OrdersButton">View Orders</button></a></td>
+						name="addOrdersButton">View Orders</button></a></td>
 		</tr>
 		<tr>
 			<td><a href="accounts.jsp"><button id="viewAccounts"
-						name="ViewAccountsButton">View Accounts</button></a></td>
+						name="addViewAccountsButton">View Accounts</button></a></td>
 		</tr>
 		<tr>
 			<td><a href="login.jsp?logout">Logout</a></td>

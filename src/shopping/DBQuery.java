@@ -83,7 +83,8 @@ public class DBQuery {
 		}
 
 	}
-
+	
+	
 	public boolean exist(String username, String password) throws SQLException {
 		Connection dbConnection = null;
 		PreparedStatement preparedStatement = null;
@@ -408,6 +409,45 @@ public class DBQuery {
 
 	}
 
+	
+	public void addItem(String username, String password) throws SQLException {
+
+		Connection dbConnection = null;
+		PreparedStatement preparedStatement = null;
+
+		String insertTableSQL = "INSERT INTO users" + "(user_id, username, password, user_type_id) VALUES"
+				+ "(ID_SEQ.NEXTVAL,?,?, 2)";
+
+		try {
+			dbConnection = getDBConnection();
+			preparedStatement = dbConnection.prepareStatement(insertTableSQL);
+
+			// execute insert SQL statement
+			preparedStatement.setString(1, username);
+			preparedStatement.setString(2, password);
+			preparedStatement.executeUpdate();
+
+			System.out.println("Record is inserted into DBUSER table!");
+
+		} catch (SQLException e) {
+
+			System.out.println(e.getMessage());
+
+		} finally {
+
+			if (preparedStatement != null) {
+				preparedStatement.close();
+			}
+
+			if (dbConnection != null) {
+				dbConnection.close();
+			}
+
+		}
+
+	}
+	
+	
 	public void updateItem(int item_id, String name, double price, String description, int quantity)
 			throws SQLException {
 
